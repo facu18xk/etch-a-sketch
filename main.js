@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 const canvas = document.querySelector('.canvas');
-const color = "white";
+let color = "white";
 const grid = 16;
 /**
  * Creates a function that calculates the width and the height depending on the container width/height 
@@ -58,7 +58,16 @@ function changeColorPixel() {
     <input type="text" class="popup--input" data-coloris>
     <button class="popup--button">Ok</button>    
     `;
-
+    const inputColor = document.querySelector(".popup--input");
+    const button = document.querySelector(".popup--button");
+    button.addEventListener('click', () => {
+        if (inputColor.value.trim() == "")
+            return;
+        else {
+            color = inputColor;
+            document.body.removeChild(popup);
+        }
+    })
 }
 //Default Parameters 
 createPixels(Math.pow(grid, 2));
