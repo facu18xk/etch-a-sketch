@@ -24,7 +24,7 @@
     formatToggle: false,
     swatches: [],
     swatchesOnly: false,
-    alpha: true,
+    alpha: false,
     forceAlpha: false,
     focusInput: true,
     selectInput: false,

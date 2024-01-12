@@ -26,20 +26,26 @@ body {
     margin-bottom: 30px;
 }
 
-.buttons button {
-    margin-right: 20px;
-    padding: 20px 30px;
-    border-radius: 10px;
+button {
     border: none;
     color: white;
     font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.2);
     transition: all 0.5s;
 }
 
-.buttons button:hover {
+.buttons button {
+    margin-right: 20px;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+
+button:hover {
     transform: scale(1.1);
     box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.6);
 }
@@ -50,6 +56,7 @@ body {
     height: 100vh;
     z-index: 10;
     display: flex;
+    gap: 20px;
     flex-direction: column;
     justify-content: center;
     align-items: center;

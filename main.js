@@ -41,13 +41,25 @@ function createPixels(numberPixels) {
  * Function that creates a popup
  */
 function popUp() {
-    const popupContainer = document.createElement('div');
+    const popup = document.createElement('div');
+    popup.classList.add("popup");
+    document.body.appendChild(popup);
+    return popup;
 }
 /**
  * Creates a popup for changing the grid 
  */
 function changeGrid() {
-    const popup = document.createElement()
+}
+function changeColorPixel() {
+    let popup = popUp();
+    popup.innerHTML = `
+    <h2 class="popup--title">Pick a color</h2>
+    <input type="text" class="popup--input" data-coloris>
+    <button class="popup--button">Ok</button>    
+    `;
+
 }
 //Default Parameters 
 createPixels(Math.pow(grid, 2));
+changeColorPixel();
