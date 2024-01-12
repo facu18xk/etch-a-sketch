@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 const canvas = document.querySelector('.canvas');
-const color = "red";
+const color = "white";
 const grid = 16;
 /**
  * Creates a function that calculates the width and the height depending on the container width/height 
@@ -37,4 +37,17 @@ function createPixels(numberPixels) {
     }
     container.addEventListener('mouseover', changeColor)
 }
+/**
+ * Function that creates a popup
+ */
+function popUp() {
+    const popupContainer = document.createElement('div');
+}
+/**
+ * Creates a popup for changing the grid 
+ */
+function changeGrid() {
+    const popup = document.createElement()
+}
+//Default Parameters 
 createPixels(Math.pow(grid, 2));
