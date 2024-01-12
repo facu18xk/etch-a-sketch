@@ -64,7 +64,8 @@ function changeColorPixel() {
         if (inputColor.value.trim() == "")
             return;
         else {
-            color = inputColor;
+            color = inputColor.value;
+            console.log(color);
             document.body.removeChild(popup);
         }
     })
