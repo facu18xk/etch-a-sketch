@@ -2,7 +2,7 @@ const container = document.querySelector('.container');
 const canvas = document.querySelector('.canvas');
 const changeColorButton = document.querySelector('.changeColor');
 const changeGridButton = document.querySelector('.changeGrid');
-let color = "white";
+let color = "#FFFFFF";
 let grid = 16;
 const SQUARE_POWER = 2;
 /**
@@ -18,11 +18,18 @@ function calculatePixelSize(numberPixels) {
     return containerWidth / numberPixelsPerSide;
 }
 
+
+
 /**
  * Change the color of the color of the div
  */
-const changeColor = ev =>
+const changeColor = ev => {
+    const opacity = parseFloat(ev.target.style.opacity) || 0;
+    if (opacity < 1) {
+        ev.target.style.opacity = opacity + 0.1;
+    }
     ev.target.style.backgroundColor = color;
+}
 
 /**
  * Function that create the desire number of pixels for the canvas and added to it
