@@ -2,9 +2,14 @@ const container = document.querySelector('.container');
 const canvas = document.querySelector('.canvas');
 const changeColorButton = document.querySelector('.changeColor');
 const changeGridButton = document.querySelector('.changeGrid');
+const eraserButton = document.querySelector('.eraser');
+const rainbowButton = document.querySelector('.rainbow');
 let color = "#FFFFFF";
 let grid = 16;
 const SQUARE_POWER = 2;
+let rainbow = false;
+let eraser = false;
+let initialBackgroundColor = window.getComputedStyle(container).backgroundColor;
 /**
  * Creates a function that calculates the width and the height depending on the container width/height 
  * create a function that creates divs with its styles 
@@ -17,7 +22,17 @@ function calculatePixelSize(numberPixels) {
     const containerWidth = container.offsetWidth;
     return containerWidth / numberPixelsPerSide;
 }
-
+const generateRandomRgbValue = () => Math.floor(Math.random() * 256);
+/**
+ * Generate a random color 
+ * @returns randomColor
+ */
+const generateRandomColor = () => `rgb(${generateRandomRgbValue()}, ${generateRandomRgbValue()}, ${generateRandomRgbValue()})`;
+/**
+ *  Hex color to rgb color conversion 
+ * @param {*} hex 
+ * @returns 
+ */
 function hexToRgb(hex) {
     // Remove the hash (#) if it exists
     hex = hex.replace(/^#/, '');
@@ -31,21 +46,34 @@ function hexToRgb(hex) {
     // Return the RGB values as an object
     return `rgb(${r}, ${g}, ${b})`;
 }
-
 /**
- * Change the color of the color of the div
+ *  Change the opacity of the grid item 
+ * @param {*} ev event  
  */
-const changeColor = ev => {
+function changeOpacity(ev) {
     let opacity = parseFloat(ev.target.style.opacity) || 0;
     if (opacity === 1.0 &&
         ev.target.style.backgroundColor != hexToRgb(color)) {
         opacity = 0;
     }
-    if (opacity < 1) {
+    if (opacity < 1)
         ev.target.style.opacity = opacity + 0.1;
-    }
-    ev.target.style.backgroundColor = color;
 
+}
+/**
+ *  Change the color of the gird item
+ * @param {*} ev event
+ */
+function changeColor(ev) {
+    if (!rainbow && !eraser) {
+        changeOpacity(ev);
+        ev.target.style.backgroundColor = color;
+    }
+    else if (eraser) {
+        ev.target.style.backgroundColor = initialBackgroundColor;
+    }
+    else
+        ev.target.style.backgroundColor = generateRandomColor();
 }
 
 /**
@@ -125,5 +153,25 @@ function changeColorPixel() {
 //Listeners for the buttons 
 changeColorButton.addEventListener('click', changeColorPixel);
 changeGridButton.addEventListener('click', changeGrid);
+rainbowButton.addEventListener('click', () => {
+    if (rainbow) {
+        rainbow = false;
+        rainbowButton.innerText = "Rainbow OFF";
+    }
+    else {
+        rainbow = true;
+        rainbowButton.innerText = "Rainbow ON";
+    }
+})
+eraserButton.addEventListener('click', () => {
+    if (eraser) {
+        eraser = false;
+        eraserButton.innerText = "Eraser OFF"
+    }
+    else {
+        eraser = true;
+        eraserButton.innerText = "Eraser ON";
+    }
+})
 //Default Parameters 
 createPixels(Math.pow(grid, SQUARE_POWER));
