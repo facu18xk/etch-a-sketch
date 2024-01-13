@@ -18,17 +18,34 @@ function calculatePixelSize(numberPixels) {
     return containerWidth / numberPixelsPerSide;
 }
 
+function hexToRgb(hex) {
+    // Remove the hash (#) if it exists
+    hex = hex.replace(/^#/, '');
 
+    // Parse the hex values into individual RGB values
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+
+    // Return the RGB values as an object
+    return `rgb(${r}, ${g}, ${b})`;
+}
 
 /**
  * Change the color of the color of the div
  */
 const changeColor = ev => {
-    const opacity = parseFloat(ev.target.style.opacity) || 0;
+    let opacity = parseFloat(ev.target.style.opacity) || 0;
+    if (opacity === 1.0 &&
+        ev.target.style.backgroundColor != hexToRgb(color)) {
+        opacity = 0;
+    }
     if (opacity < 1) {
         ev.target.style.opacity = opacity + 0.1;
     }
     ev.target.style.backgroundColor = color;
+
 }
 
 /**
