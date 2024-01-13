@@ -15,9 +15,6 @@ The goal of this project is to create a dynamic Etch-a-Sketch application with t
 6. Extra Credit:
    - RGB value randomization on each interaction.
    - Progressive darkening effect: Each interaction adds 10% more black or color to the square.
-##Live Preview
-[Live preview](https://facu18xk.github.io/etch-a-sketch/) 
-
 
 
 
