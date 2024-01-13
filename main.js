@@ -1,7 +1,9 @@
 const container = document.querySelector('.container');
 const canvas = document.querySelector('.canvas');
+const changeColorButton = document.querySelector('.changeColor');
+const changeGridButton = document.querySelector('.changeGrid');
 let color = "white";
-const grid = 16;
+let grid = 16;
 /**
  * Creates a function that calculates the width and the height depending on the container width/height 
  * create a function that creates divs with its styles 
@@ -50,9 +52,27 @@ function popUp() {
  * Creates a popup for changing the grid 
  */
 function changeGrid() {
+    const popup = popUp();
+    popup.innerHTML = `
+        <h2 class="popup--title">Select the gird size</h2> 
+        <input id="grid" type="range" min="2" value="16" step="2" max="100" class="popup--input"> 
+        <label for="grid" class ="value">Value: 16</label> 
+        <button class="popup--button">Ok</button>
+    `;
+    const input = document.querySelector('.popup--input');
+    const button = document.querySelector('.popup--button');
+    input.addEventListener('input', (ev) => {
+        const valueIndicator = document.querySelector('.value')
+        valueIndicator.innerText = `Value: ${ev.target.value}`;
+    });
+    button.addEventListener('click', () => {
+        grid = parseInt(input.value);
+        document.body.removeChild(popup);
+        createPixels(Math.pow(grid, 2));
+    });
 }
 function changeColorPixel() {
-    let popup = popUp();
+    const popup = popUp();
     popup.innerHTML = `
     <h2 class="popup--title">Pick a color</h2>
     <input type="text" class="popup--input" data-coloris>
@@ -65,11 +85,12 @@ function changeColorPixel() {
             return;
         else {
             color = inputColor.value;
-            console.log(color);
             document.body.removeChild(popup);
         }
     })
 }
+//Listeners for the buttons 
+changeColorButton.addEventListener('click', changeColorPixel);
+changeGridButton.addEventListener('click', changeGrid);
 //Default Parameters 
 createPixels(Math.pow(grid, 2));
-changeColorPixel();
