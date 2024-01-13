@@ -4,6 +4,7 @@ const changeColorButton = document.querySelector('.changeColor');
 const changeGridButton = document.querySelector('.changeGrid');
 let color = "white";
 let grid = 16;
+const SQUARE_POWER = 2;
 /**
  * Creates a function that calculates the width and the height depending on the container width/height 
  * create a function that creates divs with its styles 
@@ -71,15 +72,23 @@ function changeGrid() {
         createPixels(Math.pow(grid, 2));
     });
 }
+/**
+ * Create a popup for showing a input to change the color of the pixel 
+ */
 function changeColorPixel() {
     const popup = popUp();
     popup.innerHTML = `
     <h2 class="popup--title">Pick a color</h2>
-    <input type="text" class="popup--input" data-coloris>
+    <input id="color" type="color" class="popup--input" >
+    <label for="color">Color: #fff </label>
     <button class="popup--button">Ok</button>    
     `;
     const inputColor = document.querySelector(".popup--input");
     const button = document.querySelector(".popup--button");
+    inputColor.addEventListener('input', (ev) => {
+        const colorIndicator = document.querySelector('label[for="color"]');
+        colorIndicator.innerText = `Color: ${ev.target.value}`
+    })
     button.addEventListener('click', () => {
         if (inputColor.value.trim() == "")
             return;
@@ -87,10 +96,10 @@ function changeColorPixel() {
             color = inputColor.value;
             document.body.removeChild(popup);
         }
-    })
+    });
 }
 //Listeners for the buttons 
 changeColorButton.addEventListener('click', changeColorPixel);
 changeGridButton.addEventListener('click', changeGrid);
 //Default Parameters 
-createPixels(Math.pow(grid, 2));
+createPixels(Math.pow(grid, SQUARE_POWER));
